@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+    <div class="jumbotron">
+        <h1>Welcome To Sports Management System</h1>
+        @if (User.IsInRole("Admin"))
+        {
+            <p>
+                <a href="@Url.Action("Index", "Game")" class="btn btn-primary btn-lg">Games</a>
+                <a href="@Url.Action("Index", "Competitor")" class="btn btn-primary btn-lg">Competitors</a>
+            </p>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "Event")" class="btn btn-primary btn-lg">Events</a>
+            <a href="@Url.Action("Index", "Report")" class="btn btn-primary btn-lg">Reports</a>
+        }
+    </div>
+

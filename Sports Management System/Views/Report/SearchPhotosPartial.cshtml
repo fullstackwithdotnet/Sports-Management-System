@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Sports_Management_System.Models.ViewModels.AdvanceSearchViewModel>
+
+    <div style="margin-top:10px" class="panel panel-info">
+        <div class="panel panel-heading"><h2>Event Photos</h2></div>
+        <div class="panel panel-body">
+            <div class="row">
+                @if (Model != null)
+                {
+                    foreach (var photo in Model)
+                    {
+                        <div class="col-md-3">
+                            @{
+                                string fileName = Path.GetFileName(photo.Photos.Event_Photo);
+                                string imagePath = Url.Content("~/EventPhotos/" + fileName);
+                            }
+                            <img src="@imagePath" alt="ASP.NET" style="width:150px;height:150px" class="img-responsive thumbnail" />
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+

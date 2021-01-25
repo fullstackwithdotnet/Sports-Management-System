@@ -1,0 +1,91 @@
+﻿@model Sports_Management_System.Models.Competitor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Competitor Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayFor(model => model.Competitor_Name)
+        </dt>
+
+        <dd>
+            @Model.Competitor_Salutation.@Model.Competitor_Name
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_DoB)
+        </dt>
+
+        <dd>
+            @Model.Competitor_DoB.ToString("dd/MM/yyyy")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitor_Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitor_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitor_Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitor_Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_ContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitor_ContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_Website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitor_Website)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitor_Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitor_Photo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Competitor_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

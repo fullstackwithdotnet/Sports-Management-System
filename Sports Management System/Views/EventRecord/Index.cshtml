@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Sports_Management_System.Models.ViewModels.EventRecordViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Event Records for Event No : @ViewBag.EventId</h2>
+
+
+<p>
+    @Html.ActionLink("+ New Record", "Create", new { eventId = ViewBag.EventId }, new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Competitor.Competitor_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event.EventVenue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventRecord.Competitor_Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventRecord.Competitor_Medal)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.EventRecord.WorldRecord)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Competitor.Competitor_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event.EventVenue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventRecord.Competitor_Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventRecord.Competitor_Medal)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.EventRecord.WorldRecord)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new
+                {
+                    id = item.EventRecord.ID,
+                    eventId = item.Event.Event_ID
+               }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EventRecord.ID })
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+
+<p>
+    @Html.ActionLink("Back To Events", "Index", "Event", null, new { @class = "btn btn-default" })
+</p>

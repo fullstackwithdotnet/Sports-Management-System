@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Sports_Management_System.Models.Event_Photos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Photos of Event @ViewBag.EventId</h2>
+
+<p>
+    @Html.ActionLink("+ Add Photo ", "Create",new { eventId = ViewBag.EventId }, new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Event_Photo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event_PhotoTags)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @{
+                    string fileName = Path.GetFileName(item.Event_Photo);
+                    string imagePath = Url.Content("~/EventPhotos/" + fileName);
+
+                };
+                <img src="@imagePath" alt="ASP.NET" style="width:150px;height:150px" class="img-responsive" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event_PhotoTags)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Photo_ID, eventId = item.Event_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Photo_ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back To Events", "Index", "Event", null, new { @class = "btn btn-default" })
+</p>

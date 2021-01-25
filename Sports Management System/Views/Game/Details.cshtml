@@ -1,0 +1,58 @@
+﻿@model Sports_Management_System.Models.Game
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Game Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Game_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Game_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Game_DurationInHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game_DurationInHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Game_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Game_RulesBooklet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game_RulesBooklet)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Game_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

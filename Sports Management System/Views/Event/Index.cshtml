@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Sports_Management_System.Models.ViewModels.EventViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Events</h2>
+
+<p>
+    @Html.ActionLink("+ Add Event", "Create", null,new { @class = "btn btn-default"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.Game_Name)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Event.FeatureEvent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event.EventVenue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event.EventDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event.EventStartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event.EventEndTime)
+        </th>
+        <th style="max-width:200px; text-overflow:ellipsis;overflow:hidden;white-space:nowrap">
+            @Html.DisplayNameFor(model => model.Event.EventDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.Game_Name)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.Event.FeatureEvent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.EventVenue)
+        </td>
+        <td>
+            @item.Event.EventDate.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @item.Event.EventStartTime.ToString("hh:mm tt")
+        </td>
+        <td>
+            @item.Event.EventEndTime.ToString("hh:mm tt")
+        </td>
+        <td style="max-width:200px; text-overflow:ellipsis;overflow:hidden;white-space:nowrap">
+            @Html.DisplayFor(modelItem => item.Event.EventDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Event.Event_ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Event.Event_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Event.Event_ID }) |
+            <a href="@Url.Action("Index","EventRecord", new { id = item.Event.Event_ID})">Records</a> |
+            <a href="@Url.Action("Index","EventPhoto", new { id = item.Event.Event_ID})">Photos</a>
+
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,8 @@
+﻿@using Sports_Management_System.Models
+@model AssignedGameData
+
+    <fieldset>
+        @Html.HiddenFor(model => model.Game_ID)
+        @Html.CheckBoxFor(model => model.Assigned)
+        @Html.DisplayFor(model => model.Game_Name)
+    </fieldset>

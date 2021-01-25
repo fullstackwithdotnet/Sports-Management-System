@@ -1,0 +1,66 @@
+﻿@model Sports_Management_System.Models.Event
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Event Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FeatureEvent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeatureEvent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventVenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventVenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Event_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

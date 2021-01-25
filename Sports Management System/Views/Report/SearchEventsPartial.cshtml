@@ -1,0 +1,79 @@
+﻿@model Sports_Management_System.Models.ViewModels.ReportsViewModel
+
+    <div name="eventData" style="padding:10px 10px 10px 10px;">
+        <div style="margin-top:10px" class="panel panel-primary">
+            <div class="panel panel-heading">
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>Event Details</h3>
+                    </div>                   
+                </div>
+
+            </div>
+            <div class="panel panel-body">
+                <div class="row">
+                    @foreach (var eventData in Model.EventData.GroupBy(e => e.Event))
+                    {
+                        <div class="panel panel-info">
+                            <div class="panel panel-heading">
+                                <div class="row">
+                                    <div class="col-md-3"><b>Event ID : </b>@eventData.Key.Event_ID</div>
+                                    <div class="col-md-3"><b>Event Venue : </b>@eventData.Key.EventVenue</div>
+                                    <div class="col-md-6"><b>Event Date : </b> @eventData.Key.EventDate.ToLongDateString()</div>
+                                </div>
+
+                            </div>
+                            <div class="panel panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            Country
+                                        </th>
+                                        <th style="text-align:center">
+                                            Gold Medals
+                                        </th>
+                                        <th style="text-align:center">
+                                            Silver Medals
+                                        </th>
+                                        <th style="text-align:center">
+                                            Bronz Medals
+                                        </th>
+                                        <th style="text-align:center">
+                                            Total Medals
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in eventData)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Country)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.GoldMedals)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.SilverMedals)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.BronzMedals)
+                                            </td>
+                                            <td style="text-align:center">
+                                                @Html.DisplayFor(modelItem => item.TotalMedals)
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+

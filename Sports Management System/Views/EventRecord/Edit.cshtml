@@ -1,0 +1,83 @@
+﻿@model Sports_Management_System.Models.Event_Record
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Event Record</h2>
+
+@{
+    var competitors = (IEnumerable<Sports_Management_System.Models.Competitor>)TempData["competitorsList"];
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    <input type="hidden" value="@Model.Event.Event_ID" name="@Html.NameFor(m => m.Event_ID)" id="@Html.IdFor(m => m.Event_ID)" />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Event_ID, "Event", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" disabled value="@Model.Event.Event_ID" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Event_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Competitor_ID, "Competitor", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="@Html.IdFor(model => model.Competitor_ID)" name="@Html.NameFor(model => model.Competitor_ID)" class="form-control gameList">
+                @foreach (var item in competitors)
+                {
+                    <option value="@item.Competitor_ID">@item.Competitor_Name</option>
+                }
+                {
+
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Competitor_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Competitor_Position, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Competitor_Position, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Competitor_Position, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Competitor_Medal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Competitor_Medal, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Competitor_Medal, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.WorldRecord, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.WorldRecord)
+                @Html.ValidationMessageFor(model => model.WorldRecord, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { id = Model.Event.Event_ID})
+</div>

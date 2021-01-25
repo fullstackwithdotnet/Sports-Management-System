@@ -1,0 +1,122 @@
+﻿@model Sports_Management_System.Models.ViewModels.ReportsViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row">
+        <div class="col-md-2">
+            <h2>Reports</h2>
+        </div>
+        <div class="col-md-3" style="margin-top:20px">
+            <a href="@Url.Action("Search", "Report")" class="btn btn-info">Advance Event Search
+                <i class="glyphicon glyphicon-search"></i>
+            </a>
+        </div>
+    </div>
+
+<div style="margin-top:20px" class="row">
+    <div class="col-md-8">
+        @foreach (var eventData in Model.EventData.GroupBy(e => e.Event))
+        {
+            <div class="panel panel-info">
+                <div class="panel panel-heading">
+                    <div class="row">
+                        <div class="col-md-3"><b>Event ID : </b>@eventData.Key.Event_ID</div>
+                        <div class="col-md-3"><b>Event Venue : </b>@eventData.Key.EventVenue</div>
+                        <div class="col-md-6"><b>Event Date : </b> @eventData.Key.EventDate.ToLongDateString()</div>
+                    </div>
+
+                </div>
+                <div class="panel panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Country
+                            </th>
+                            <th style="text-align:center">
+                                Gold Medals
+                            </th>
+                            <th style="text-align:center">
+                                Silver Medals
+                            </th>
+                            <th style="text-align:center">
+                                Bronz Medals
+                            </th>
+                            <th style="text-align:center">
+                                Total Medals
+                            </th>
+                        </tr>
+
+                        @foreach (var item in eventData)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Country)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.GoldMedals)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.SilverMedals)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.BronzMedals)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.TotalMedals)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel panel-heading">
+                <b>World Records</b>
+            </div>
+            <div class="panel panel-body">
+                <table class="table">
+                    <tr>
+                        <th>
+                            Country
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Game
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.WorldRecords)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Game)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

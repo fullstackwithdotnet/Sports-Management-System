@@ -1,0 +1,107 @@
+﻿@model  Sports_Management_System.Models.ViewModels.AdvanceSearchViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .search {
+        padding-bottom: 10px;
+        padding-top: 20px;
+        border: 1px solid black;
+        background-color: antiquewhite;
+    }
+</style>
+
+<h2>Advance Search</h2>
+
+<div class="panel panel-default" style="border:none">
+    <div class="panel panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-inline">
+                    <label>Select Event: </label>
+                    <select id="eventsList" class="form-control">
+                        <option selected="selected" value="0">All Events</option>
+                        @foreach (var item in Model.Events)
+                        {
+                            <option value="@item.Event_ID">@item.Event_ID @item.EventVenue</option>
+                        }
+                    </select>
+                    <div class="form-group">
+                        <label for="search">Event Photos</label>
+                        <input name="search" type="radio" value="photos" checked />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="search">Event Details</label>
+                        <input name="search" type="radio" value="events" />
+                    </div>
+                    <div class="form-group pull-right">
+                        <a id="print" class="btn btn-default">Export to PDF</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="searchResult">
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/html2pdf.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#print").hide();
+
+            let searchType = $('input[name="search"]:checked').val();
+            let eventId = $("#eventsList :selected").val();
+            loadData(searchType, eventId);
+        });
+
+        $('input[type=radio][name="search"]').change(function () {
+            let searchType = $(this).val();
+            if (searchType == 'events') {
+                $("#print").show();
+            }
+            else {
+                 $("#print").hide();
+            }
+
+            let eventId = $("#eventsList :selected").val();
+            loadData(searchType, eventId);
+        });
+
+        $("#eventsList").change(function () {
+            let searchType = $('input[name="search"]:checked').val();
+            let eventId = $(this).val();
+            loadData(searchType, eventId);
+
+
+        });
+
+
+        function loadData(searchType, eventId) {
+            $.ajax({
+                type: 'POST',
+                url: "/Report/Search",
+                data: { 'eventId': eventId, 'searchType': searchType },
+                success: function (result) {
+                    $('#searchResult').html(result);
+                }
+            });
+        }
+
+        document.getElementById('print').onclick = function () {
+            var element = document.getElementsByName('eventData')[0]
+            html2pdf().from(element).toPdf().save('Event_Details.pdf')
+        }
+    </script>
+}
+
+
+
